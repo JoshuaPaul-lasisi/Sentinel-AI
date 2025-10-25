@@ -1,0 +1,155 @@
+@import "tailwindcss";
+@config "../../tailwind.config.js";
+
+:root {
+  --c-background: #ffffff;
+  --c-foreground: #171717;
+
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --c-background: #0a0a0a;
+    --c-foreground: #ededed;
+  }
+}
+
+body {
+  width: 100vw !important;
+  max-width: 100vw !important;
+  overflow-x: hidden !important;
+  background: var(--c-background);
+  color: var(--c-foreground);
+  font-family: "Nunito", sans-serif;
+}
+
+/* fonts */
+.font-inter {
+  /* from 100 to 900 */
+  font-family: "Inter", sans-serif;
+}
+.font-port-lligat-sans-regular {
+  /* only 400 weight */
+  font-family: "Port Lligat Sans", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.font-rubik-puddles-regular {
+  /* only 400 weight */
+  font-family: "Rubik Puddles", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.font-roboto {
+  /* 100 to 900 weight */
+  font-family: "Roboto", sans-serif;
+}
+.font-gabriela-regular {
+  /* only 400 weight */
+  font-family: "Gabriela", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.font-nunito-sans {
+  /* 200 to 1000 weight */
+  font-family: "Nunito Sans", sans-serif;
+}
+.font-lato {
+  /* 100 to 900 weight */
+  font-family: "Lato", sans-serif;
+}
+
+.font-fredoka {
+  /* font weight from 300 to 700  */
+  font-family: "Fredoka", sans-serif;
+  font-optical-sizing: auto;
+}
+
+.font-quicksand {
+  /* 300 to 700 font weight */
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+}
+
+.font-nunito {
+  /* 200 to 1000 */
+  font-family: "Nunito", sans-serif;
+  font-optical-sizing: auto;
+}
+
+.font-manrope {
+  /* 200 to 800 font weight */
+  font-family: "Manrope", sans-serif;
+  font-optical-sizing: auto;
+}
+
+.font-space-g {
+    /* 300 to 800 */
+    font-family: "Space Grotesk", sans-serif;
+  }
+.gradient-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+.gradient-scrollbar::-webkit-scrollbar-track {
+  background: linear-gradient(to bottom, #f8fafc, #e2e8f0);
+  border-radius: 10px;
+}
+.gradient-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #cbd5e1, #94a3b8);
+  border-radius: 10px;
+  border: 2px solid #f8fafc;
+}
+.gradient-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #94a3b8, #64748b);
+}
+
+.glass-sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+.glass-sidebar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  margin: 4px 0;
+}
+.glass-sidebar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.glass-sidebar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Firefox support */
+.glass-sidebar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.1);
+}
+
+.floating-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.floating-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.floating-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+.floating-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+* {
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}

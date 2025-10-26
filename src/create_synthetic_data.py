@@ -55,7 +55,7 @@ customers = pd.DataFrame(cust_rows)
 # 3) Devices
 device_rows = []
 for did in range(1, N_DEVICES+1):
-    os = np.random.choice(["Windows","macOS","Linux","Android","iOS"], p=[0.25,0.15,0.05,0.35,0.20])
+    device_os = np.random.choice(["Windows","macOS","Linux","Android","iOS"], p=[0.25,0.15,0.05,0.35,0.20])
     browser = np.random.choice(["Chrome","Safari","Firefox","Edge","Other"], p=[0.5,0.2,0.15,0.1,0.05])
     first_seen = start_time + timedelta(days=random.randint(0, 300))
     last_seen = first_seen + timedelta(days=random.randint(0, 365))
@@ -65,7 +65,7 @@ for did in range(1, N_DEVICES+1):
     device_rows.append({
         "device_id": did,
         "device_fingerprint": str(uuid.uuid4()),
-        "os": os,
+        "os": device_os,
         "browser": browser,
         "first_seen": first_seen,
         "last_seen": last_seen,

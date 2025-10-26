@@ -5,6 +5,7 @@ import pandas as pd
 import numpy as np
 import networkx as nx
 from datetime import datetime, timedelta
+import os
 
 SEED = 42
 random.seed(SEED)
@@ -114,7 +115,8 @@ edges = []
 for _, d in devices.iterrows():
     did = int(d.device_id)
     owner = d.owner_customer_id
-    if owner:
+    # guard against NaN/None before converting to int
+    if not pd.isna(owner):
         edges.append((("customer", int(owner)), ("device", did), "owns", 1.0))
 # add sharing edges: choose some devices to be used by multiple customers
 for _ in range(int(N_DEVICES * 0.2)):
@@ -240,12 +242,14 @@ print("Transactions by fraud label:")
 print(transactions['fraud_label_id'].value_counts(normalize=True))
 
 # Save to CSV
-customers.to_csv("../data/synthetic/customers.csv", index=False)
-devices.to_csv("../data/synthetic/devices.csv", index=False)
-agents.to_csv("../data/synthetic/agents.csv", index=False)
-beneficiaries.to_csv("../data/synthetic/beneficiaries.csv", index=False)
-fraud_labels.to_csv("../data/synthetic/fraud_labels.csv", index=False)
-graph_relationships.to_csv("../data/synthetic/graph_relationships.csv", index=False)
-transactions.to_csv("../data/synthetic/transactions.csv", index=False)
+out_dir = os.path.join("..", "data", "synthetic")
+os.makedirs(out_dir, exist_ok=True)
+customers.to_csv(os.path.join(out_dir, "customers.csv"), index=False)
+devices.to_csv(os.path.join(out_dir, "devices.csv"), index=False)
+agents.to_csv(os.path.join(out_dir, "agents.csv"), index=False)
+beneficiaries.to_csv(os.path.join(out_dir, "beneficiaries.csv"), index=False)
+fraud_labels.to_csv(os.path.join(out_dir, "fraud_labels.csv"), index=False)
+graph_relationships.to_csv(os.path.join(out_dir, "graph_relationships.csv"), index=False)
+transactions.to_csv(os.path.join(out_dir, "transactions.csv"), index=False)
 
 print("CSV files written.")

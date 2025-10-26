@@ -1,0 +1,11 @@
+transaction_id,customer_id,device_id,agent_id,beneficiary_id,fraud_label_id,amount,currency,timestamp,channel,status,ip_address,country,city,risk_score,txn_type
+1,1,1,1,1,1,100.00,USD,2023-10-01 12:00:00,web,completed,192.168.1.1,USA,New York,0.123,transfer
+2,2,2,2,2,2,200.00,EUR,2023-10-02 13:00:00,mobile,completed,192.168.1.2,France,Paris,0.234,payment
+3,3,3,3,3,3,300.00,GBP,2023-10-03 14:00:00,agent,pending,192.168.1.3,UK,London,0.345,cash_out
+4,4,4,4,4,1,400.00,NGN,2023-10-04 15:00:00,atm,reversed,192.168.1.4,Nigeria,Lagos,0.456,cash_in
+5,5,5,5,5,2,500.00,KES,2023-10-05 16:00:00,web,completed,192.168.1.5,Kenya,Nairobi,0.567,payout
+6,6,6,6,6,3,600.00,GHS,2023-10-06 17:00:00,mobile,failed,192.168.1.6,Ghana,Accra,0.678,transfer
+7,7,7,7,7,1,700.00,USD,2023-10-07 18:00:00,agent,completed,192.168.1.7,USA,Los Angeles,0.789,payment
+8,8,8,8,8,2,800.00,EUR,2023-10-08 19:00:00,atm,pending,192.168.1.8,France,Marseille,0.890,cash_out
+9,9,9,9,9,3,900.00,GBP,2023-10-09 20:00:00,web,reversed,192.168.1.9,UK,Birmingham,0.901,cash_in
+10,10,10,10,10,1,1000.00,NGN,2023-10-10 21:00:00,mobile,completed,192.168.1.10,Nigeria,Abuja,0.012,payout

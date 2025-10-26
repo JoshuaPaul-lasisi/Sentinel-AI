@@ -1,4 +1,0 @@
-fraud_label_id,label,description
-1,Legit,No fraud detected
-2,Suspicious,Needs review
-3,Fraud,Confirmed fraud

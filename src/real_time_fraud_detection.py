@@ -11,11 +11,11 @@ import warnings
 warnings.filterwarnings('ignore')
 
 # Load all datasets
-print("📥 Loading datasets...")
-transactions = pd.read_csv("data/synthetic/transactions.csv", parse_dates=['timestamp'])
-customers = pd.read_csv("data/synthetic/customers.csv")
-devices = pd.read_csv("data/synthetic/devices.csv")
-beneficiaries = pd.read_csv("data/synthetic/beneficiaries.csv")
+print("Loading datasets...")
+transactions = pd.read_csv("../data/synthetic/transactions.csv", parse_dates=['timestamp'])
+customers = pd.read_csv("../data/synthetic/customers.csv")
+devices = pd.read_csv("../data/synthetic/devices.csv")
+beneficiaries = pd.read_csv("../data/synthetic/beneficiaries.csv")
 
 print(f"Transactions: {transactions.shape}")
 print(f"Customers: {customers.shape}")
@@ -95,7 +95,7 @@ def create_real_time_features(transactions, customers, devices, beneficiaries):
     # ==================== TARGET VARIABLE ====================
     df['is_fraud'] = (df['fraud_label_id'] == 3).astype(int)
     
-    print(f"✅ Feature engineering complete. Final shape: {df.shape}")
+    print(f"Feature engineering complete. Final shape: {df.shape}")
     return df
 
 # Create features
@@ -119,7 +119,7 @@ def time_based_split(df, test_size_days=30):
     y_train = df_sorted[train_mask]['is_fraud']
     y_test = df_sorted[test_mask]['is_fraud']
     
-    print(f"📊 Time-based split:")
+    print(f"Time-based split:")
     print(f"   Train: {X_train.shape[0]} transactions (until {cutoff_date})")
     print(f"   Test:  {X_test.shape[0]} transactions (after {cutoff_date})")
     print(f"   Fraud rate - Train: {y_train.mean():.3f}, Test: {y_test.mean():.3f}")
@@ -149,7 +149,7 @@ def train_models(X_train, y_train):
     scaler = StandardScaler()
     X_train_scaled = scaler.fit_transform(X_train)
     
-    print("🤖 Training Isolation Forest...")
+    print("Training Isolation Forest...")
     iso_forest = IsolationForest(
         contamination=0.05,  # Expected fraud rate
         random_state=42,
@@ -158,7 +158,7 @@ def train_models(X_train, y_train):
     )
     iso_forest.fit(X_train_scaled)
     
-    print("🤖 Training XGBoost...")
+    print("Training XGBoost...")
     xgb_model = xgb.XGBClassifier(
         n_estimators=200,
         max_depth=6,
@@ -191,19 +191,19 @@ def evaluate_models(iso_model, xgb_model, scaler, X_test, y_test, feature_column
     xgb_predictions = (xgb_probs > 0.5).astype(int)
     
     print("=" * 60)
-    print("🎯 MODEL EVALUATION RESULTS")
+    print("MODEL EVALUATION RESULTS")
     print("=" * 60)
     
-    print("\n🔍 ISOLATION FOREST:")
+    print("\nISOLATION FOREST:")
     print(classification_report(y_test, iso_predictions, target_names=['Legit', 'Fraud']))
     print(f"ROC-AUC: {roc_auc_score(y_test, -iso_scores):.4f}")  # Lower scores = more anomalous
     
-    print("\n🔍 XGBOOST:")
+    print("\nXGBOOST:")
     print(classification_report(y_test, xgb_predictions, target_names=['Legit', 'Fraud']))
     print(f"ROC-AUC: {roc_auc_score(y_test, xgb_probs):.4f}")
     
     # Feature importance
-    print("\n📊 XGBoost Feature Importance:")
+    print("\nXGBoost Feature Importance:")
     importance_df = pd.DataFrame({
         'feature': feature_columns,
         'importance': xgb_model.feature_importances_
@@ -224,7 +224,7 @@ def create_shap_explainer(xgb_model, X_train_feats, feature_columns):
     """
     Create SHAP explainer for model interpretability
     """
-    print("🧠 Creating SHAP explainer...")
+    print("Creating SHAP explainer...")
     
     # Use smaller sample for performance
     explainer = shap.TreeExplainer(xgb_model)
@@ -397,7 +397,7 @@ def save_artifacts():
     }
     
     joblib.dump(artifacts, 'sentinel_ai_artifacts.pkl')
-    print("✅ All artifacts saved for production deployment!")
+    print("All artifacts saved for production deployment!")
 
 save_artifacts()
 

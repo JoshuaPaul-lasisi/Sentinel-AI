@@ -11,7 +11,7 @@ services:
         value: 3.9.0
 """
 
-with open('render.yml', 'w') as f:
+with open('render.yaml', 'w') as f:
     f.write(render_config)
 
-print("render.yml created - ready for deployment")
+print("render.yaml created - ready for deployment")

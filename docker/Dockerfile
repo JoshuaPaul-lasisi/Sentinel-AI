@@ -3,6 +3,16 @@ FROM python:3.11-slim
 # Set the working directory
 WORKDIR /app
 
+# Install system dependencies required for pandas/numpy/scipy
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    gcc \
+    g++ \
+    libatlas-base-dev \
+    liblapack-dev \
+    libblas-dev \
+    && rm -rf /var/lib/apt/lists/*
+
 # Copy the requirements file
 COPY requirements.txt .
 

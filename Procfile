@@ -1,0 +1,1 @@
+web: uvicorn real_time_fraud_detection:app --host=0.0.0.0 --port=$PORT

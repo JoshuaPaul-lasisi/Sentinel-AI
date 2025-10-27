@@ -2,6 +2,8 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Dict, Any, Optional
+from sklearn.ensemble import IsolationForest
+from sklearn.preprocessing import StandardScaler
 import pandas as pd
 import numpy as np
 import joblib
@@ -18,7 +20,7 @@ app = FastAPI(
 # CORS middleware for frontend integration
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production, specify your frontend URL
+    allow_origins=["*"], 
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -40,7 +42,7 @@ async def load_models():
     global MODELS_LOADED, xgb_model, iso_model, feature_scaler, shap_explainer, feature_columns, customers_df, devices_df
     
     try:
-        # Load your pre-trained artifacts
+        # Load pre-trained artifacts
         artifacts = joblib.load('sentinel_ai_artifacts.pkl')
         
         xgb_model = artifacts['xgb_model']
@@ -63,10 +65,7 @@ async def train_fallback_model():
     """Train a simple fallback model if main models fail to load"""
     global MODELS_LOADED, xgb_model, feature_scaler, feature_columns
     
-    try:
-        from sklearn.ensemble import IsolationForest
-        from sklearn.preprocessing import StandardScaler
-        
+    try:        
         # Simple fallback features
         feature_columns = ['amount', 'hour', 'is_mobile', 'is_high_amount']
         
@@ -75,8 +74,8 @@ async def train_fallback_model():
         feature_scaler = StandardScaler()
         X_scaled = feature_scaler.fit_transform(X_train)
         
-        xgb_model = IsolationForest(contamination=0.05, random_state=42)
-        xgb_model.fit(X_scaled)
+        iso_model = IsolationForest(contamination=0.05, random_state=42)
+        iso_model.fit(X_scaled)
         
         MODELS_LOADED = True
         print("Fallback model trained successfully")
@@ -91,7 +90,6 @@ class TransactionRequest(BaseModel):
     amount: float
     channel: str
     timestamp: str
-    # Optional: Add more fields as needed
 
 class PredictionResponse(BaseModel):
     transaction_id: str

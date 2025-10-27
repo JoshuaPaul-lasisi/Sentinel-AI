@@ -21,7 +21,7 @@ dummy_data = np.random.randn(100, 7)
 artifacts['scaler'].fit(dummy_data)
 
 # Save with maximum compatibility
-joblib.dump(artifacts, "sentinel_ai_artifacts_working.pkl", protocol=2)
+joblib.dump(artifacts, "sentinel_ai_artifacts_working.pkl", protocol=4, compress=('gzip', 3))
 
 print("Minimal artifacts saved: sentinel_ai_artifacts_working.pkl")
 

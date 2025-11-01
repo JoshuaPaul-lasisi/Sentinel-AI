@@ -3,7 +3,7 @@
 ## Overview
 The Sentinel AI project is designed to implement a real-time fraud detection system using synthetic data. It leverages machine learning models to identify potentially fraudulent transactions and provides an API for real-time predictions.
 
-## Project Structure
+## Project Structure (proposed)
 ```
 sentinel-ai
 ├── src

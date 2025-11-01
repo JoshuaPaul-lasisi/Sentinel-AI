@@ -218,7 +218,7 @@ artifacts = {
     'xgb_model': xgb_model,
     'iso_model': iso_model,
     'scaler': scaler,
-    'shap_explainer': explainer,
+    'shap_explainer': explainer if explainer else None,
     'feature_columns': feature_columns,
     'customers_df': customers_for_rt,
     'devices_df': devices_for_rt,

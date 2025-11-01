@@ -43,7 +43,7 @@ async def load_models():
     
     try:
         # Load pre-trained artifacts
-        artifacts = joblib.load('sentinel_ai_artifacts.pkl')
+        artifacts = joblib.load('../src/sentinel_ai_artifacts.pkl')
         
         xgb_model = artifacts['xgb_model']
         iso_model = artifacts['iso_model']
